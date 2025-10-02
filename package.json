@@ -1,9 +1,24 @@
 {
+  "name": "restaurant-ai",
+  "version": "1.0.0",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node app/index.js",
+    "dev": "nodemon app/index.js",
+    "frontend": "cd restaurant-ai-online && npm install && npm start",
+    "all": "concurrently \"npm run dev\" \"npm run frontend\""
+  },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
     "form-data": "^4.0.4",
     "multer": "^2.0.2",
     "react-hot-toast": "^2.6.0",
     "recharts": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
