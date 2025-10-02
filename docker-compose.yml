@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  restaurant-ai:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@db.abcd.supabase.co:5432/postgres?schema=public"
+      OPENAI_API_KEY: "sk-yourkey"
+      JWT_SECRET: "R7xP!3kLzQ9vB2wF"
+      REDIS_URL: "redis://redis:6379"
+      STRIPE_SECRET_KEY: "sk_test_XXXX"
+      STRIPE_WEBHOOK_SECRET: "whsec_XXXX"
+      NEXT_PUBLIC_URL: "http://localhost:5000"
+    depends_on:
+      - redis

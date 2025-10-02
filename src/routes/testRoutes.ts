@@ -1,19 +1,21 @@
-import { Router } from 'express';
-import jwt from 'jsonwebtoken';
+import { Router, Request, Response, NextFunction } from "express";
+import redis from "../config/redisClient";
 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'SuperSecretKey123!';
 
-// JWT test
-router.get('/jwt', (req, res) => {
-  const token = jwt.sign({ userId: 1 }, JWT_SECRET, { expiresIn: '1h' });
-  const payload = jwt.verify(token, JWT_SECRET);
-  res.json({ token, payload });
+// Test Redis
+router.get("/ping-redis", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const pong = await redis.ping();
+    return res.json({ redis: pong });
+  } catch (err) {
+    next(err);
+  }
 });
 
-// Redis dummy test
-router.get('/redis', (req, res) => {
-  res.json({ value: "Hello Redis (dummy)" });
+// Test server
+router.get("/ping", (req: Request, res: Response) => {
+  return res.json({ message: "pong", status: "ok" });
 });
 
 export default router;

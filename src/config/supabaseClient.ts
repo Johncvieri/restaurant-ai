@@ -1,15 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import { createClient } from "@supabase/supabase-js";
 
-// Dummy supabase client untuk development
-class DummySupabase {
-  async from(table: string) {
-    return { select: async () => ({ data: [], error: null }) };
-  }
-}
+const supabaseUrl = process.env.SUPABASE_URL || "https://xyzcompany.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const supabase = process.env.SUPABASE_URL && process.env.SUPABASE_KEY
-  ? require('@supabase/supabase-js').createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY)
-  : new DummySupabase();
-
-console.log('Supabase initialized (real or dummy)');
+export default supabase;
