@@ -10,7 +10,7 @@ const verifyToken = (token) => {
     try {
         return jwt.verify(token, secret);
     }
-    catch (_a) {
+    catch {
         return null;
     }
 };

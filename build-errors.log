@@ -1,0 +1,6 @@
+
+> restaurant-ai@1.0.0 build
+> tsc
+
+src/config/redisClient.ts(5,12): error TS2702: 'Redis' only refers to a type, but is being used as a namespace here.
+src/config/redisClient.ts(10,22): error TS7006: Parameter 'err' implicitly has an 'any' type.
